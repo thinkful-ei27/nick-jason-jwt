@@ -39,7 +39,7 @@ const storeAuthInfo = (authToken, dispatch) => {
     const decodedToken = jwtDecode(authToken);
     dispatch(setAuthToken(authToken));
     dispatch(authSuccess(decodedToken.user));
-    saveAuthToken(authToken);
+    // saveAuthToken(authToken); -affects local storage
 };
 
 export const login = (username, password) => dispatch => {
@@ -97,6 +97,6 @@ export const refreshAuthToken = () => (dispatch, getState) => {
             // them and sign us out
             dispatch(authError(err));
             dispatch(clearAuth());
-            clearAuthToken(authToken);
+            // clearAuthToken(authToken); affects the local storage
         });
 };
