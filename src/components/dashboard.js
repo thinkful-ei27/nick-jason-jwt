@@ -7,13 +7,18 @@ import { timerTest } from '../actions/auth';
 
 export class Dashboard extends React.Component {
     componentDidMount() {
-        timerTest();
+        timerTest(this.props.dispatch);
         this.props.dispatch(fetchProtectedData());
     }
 
     render() {
+        let warningMessage;
+        if(this.props.warning){
+            warningMessage = (<div><h3>YOU GOT A MINUTE</h3></div>)
+        }
         return (
             <div className="dashboard">
+                {warningMessage}
                 <div className="dashboard-username">
                     Username: {this.props.username}
                 </div>
@@ -21,7 +26,6 @@ export class Dashboard extends React.Component {
                 <div className="dashboard-protected-data">
                     Protected data: {this.props.protectedData}
                 </div>
-                {logout}
             </div>
         );
     }
@@ -32,7 +36,8 @@ const mapStateToProps = state => {
     return {
         username: state.auth.currentUser.username,
         name: `${currentUser.firstName} ${currentUser.lastName}`,
-        protectedData: state.protectedData.data
+        protectedData: state.protectedData.data,
+        warning: state.auth.warning
     };
 };
 

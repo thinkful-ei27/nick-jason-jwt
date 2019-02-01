@@ -33,6 +33,11 @@ export const authError = error => ({
     error
 });
 
+export const AUTH_TIMEOUT = 'AUTH_TIMEOUT';
+export const authTimeout = () => ({
+    type: AUTH_TIMEOUT
+});
+
 // Stores the auth token in state and localStorage, and decodes and stores
 // the user data stored in the token
 const storeAuthInfo = (authToken, dispatch) => {
@@ -78,11 +83,11 @@ export const login = (username, password) => dispatch => {
     );
 };
 
-export const timerTest = () => {
+export const timerTest = (dispatch) => {
     let alertTest = function(){ 
-        alert("The Timer works!") 
+        dispatch(authTimeout());
     }; 
-    setTimeout(alertTest, 6000) }
+    setTimeout(alertTest, 5000) }
 
 export const refreshAuthToken = () => (dispatch, getState) => {
     dispatch(authRequest());
