@@ -78,6 +78,12 @@ export const login = (username, password) => dispatch => {
     );
 };
 
+export const timerTest = () => {
+    let alertTest = function(){ 
+        alert("The Timer works!") 
+    }; 
+    setTimeout(alertTest, 6000) }
+
 export const refreshAuthToken = () => (dispatch, getState) => {
     dispatch(authRequest());
     const authToken = getState().auth.authToken;

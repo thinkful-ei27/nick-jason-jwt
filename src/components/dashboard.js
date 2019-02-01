@@ -2,9 +2,12 @@ import React from 'react';
 import {connect} from 'react-redux';
 import requiresLogin from './requires-login';
 import {fetchProtectedData} from '../actions/protected-data';
+import logout from './logout';
+import { timerTest } from '../actions/auth';
 
 export class Dashboard extends React.Component {
     componentDidMount() {
+        timerTest();
         this.props.dispatch(fetchProtectedData());
     }
 
@@ -18,6 +21,7 @@ export class Dashboard extends React.Component {
                 <div className="dashboard-protected-data">
                     Protected data: {this.props.protectedData}
                 </div>
+                {logout}
             </div>
         );
     }
